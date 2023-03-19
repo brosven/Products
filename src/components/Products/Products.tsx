@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { getProducts } from '../../api/api';
-import buildTreesList from '../../utils/buildTreesList/buildTreesList';
 import { Loader } from '../Loader/Loader';
-import { ProductCardWithTree } from '../ProductCardWithTree/ProductCardWithTree';
 import { Typography, Box } from '@mui/material';
+import buildTreesList from '../../utils/buildTreesList/buildTreesList';
+import { ProductCardWithTree } from '../ProductCardWithTree/ProductCardWithTree';
 
 const screenMessageStyle = {
   width: 'fit-content',
@@ -51,7 +51,17 @@ export const Products = () => {
       {products ? (
         buildTreesList(products).map((tree) => <ProductCardWithTree key={tree.ProductID} tree={tree} />)
       ) : (
-        <Typography variant="h2" sx={screenMessageStyle}>
+        <Typography
+          variant="h2"
+          sx={{
+            ...screenMessageStyle,
+            gridColumn: {
+              sm: 'span 2',
+              md: 'span 3',
+              lg: 'span 4',
+            },
+          }}
+        >
           Продукты отсутствуют
         </Typography>
       )}
